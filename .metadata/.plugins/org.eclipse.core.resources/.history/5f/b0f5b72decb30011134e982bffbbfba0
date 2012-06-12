@@ -1,0 +1,37 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+
+public class CustomListViewDemoActivity extends Activity {
+	ArrayList<CountryProfile> counties;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		
+		CountryProfile c1=new CountryProfile("country 1", "Capital Name 1", R.drawable.ic_launcher);
+	}
+	
+	
+	
+	
+	class CustomCountryAdapter extends ArrayAdapter<CountryProfile>
+	{
+
+		public CustomCountryAdapter(Context context, int resource,
+				int textViewResourceId) {
+			super(context, resource, textViewResourceId);
+			
+		}
+		
+	}
+	
+}

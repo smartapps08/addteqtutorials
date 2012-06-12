@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;Picker Demo/src/com.myorg.picker&apos;&#x0A;- Original project: &apos;Test Interface&apos;&#x0A;- Destination element: &apos;Picker Demo/src/com.myorg.picker&apos;&#x0A;- Original elements:&#x0A;     Interface1.java&#x0A;     Test.java" description="Copy compilation units" destination="=Picker Demo/src&lt;com.myorg.picker" element1="/src&lt;{Interface1.java" element2="/src&lt;{Test.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1339097874424" units="2" version="1.0"/>
+</session>

@@ -1,0 +1,18 @@
+package com.myorg.dbdemo;
+
+public class DBAdapter {
+	private SQLiteDatabase database
+	
+	// open database
+	public void open()
+	{
+		
+	}
+	
+	// insert
+	// update
+	// queries
+	// delete
+	// close database
+	
+}

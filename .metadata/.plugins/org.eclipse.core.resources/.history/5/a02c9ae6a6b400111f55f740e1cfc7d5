@@ -1,0 +1,48 @@
+package com.myorg.dbdemo;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+public class DBAdapter {
+	private Context context;
+	private SQLiteDatabase notesdb;
+	private DBHelper helper;
+	
+	public DBAdapter(Context context)
+	{
+		this.context=context;
+		helper=new DBHelper(context);	
+	}
+	
+	
+	// open database
+	public void open()
+	{
+		notesdb=helper.getWritableDatabase();
+	}
+	
+	// insert
+	public long insertNote(Note note)
+	{
+		return -1;
+	}
+	
+	// update
+	
+	
+	// queries
+	public ArrayList<Note> getAllNotes()
+	{
+		return null;
+	}
+	
+	// delete
+	
+	
+	// close database
+	public void close()
+	{
+		notesdb.close();
+	}
+	
+}

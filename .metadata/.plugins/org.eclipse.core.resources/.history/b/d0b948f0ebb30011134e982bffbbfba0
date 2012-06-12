@@ -1,0 +1,26 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+
+public class CustomListViewDemoActivity extends Activity {
+	ArrayList<CountryProfile> counties;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+	}
+	
+	
+	class CustomCountryAdapter extends ArrayAdapter<CountryProfile>
+	{
+		
+	}
+	
+}

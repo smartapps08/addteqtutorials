@@ -1,0 +1,43 @@
+package com.myorg.intentsdemo;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class ImplicitIntentsDemoActivity extends Activity {
+	
+	Button btnDial, btnBrowse, btnEmail;
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        btnDial=(Button)findViewById(R.id.btnDial);
+        btnBrowse=(Button)findViewById(R.id.btnBrowse);
+        btnEmail=(Button)findViewById(R.id.btnEmail);
+        
+        btnDial.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intentToDial=new Intent(Intent.ACTION_DIAL, Uri.parse("tel://911"));
+				startActivity(intentToDial);
+				
+			}
+		});
+        
+        btnBrowse.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intentToBrowse=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+				startActivity(intentToBrowse);
+				
+			}
+		});
+        
+        
+    }
+}

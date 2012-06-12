@@ -1,0 +1,23 @@
+package com.myorg.listactivity;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+
+public class ExpandableListDemoActivity extends Activity {
+	
+	ExpandableListView els;
+	ExpandableListAdapter eListAdapter;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.exp_list_layout);
+		els=(ExpandableListView)findViewById(R.id.expandableListView1);
+		
+		
+	
+	}
+
+}

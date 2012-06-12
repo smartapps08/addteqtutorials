@@ -1,0 +1,22 @@
+package com.myorg.dbdemo;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class DBAdapter {
+	private SQLiteDatabase notesdb;
+	private DBHelper helper;
+	
+	
+	// open database
+	public void open()
+	{
+		
+	}
+	
+	// insert
+	// update
+	// queries
+	// delete
+	// close database
+	
+}

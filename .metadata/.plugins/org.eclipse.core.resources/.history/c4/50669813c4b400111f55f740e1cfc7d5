@@ -1,0 +1,280 @@
+package come.Noman.Assignment2;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.R.bool;
+import android.R.integer;
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Assignment2Activity extends Activity {
+	private static final int PICK_CONTACT = 3;
+	private static final int CONTACT_PICKER_RESULT = 1001;
+	private static final String DEBUG_TAG = "0";
+	private Button sendButton;
+	private Button testButton;
+	private Button addMoreRecipient;
+	private TextView recipientTextView;
+	private EditText smsEditText;
+	private String smsMessage;
+	private String[] badWordArray;
+	private int badWordStartIndex;
+	private int badWordEndIndex;
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		// smsMessageBuilder = new
+		// StringBuilder(smsEditText.getText().toString());
+		sendButton = (Button) findViewById(R.id.sendButton);
+		testButton = (Button) findViewById(R.id.testButton);
+		addMoreRecipient = (Button) findViewById(R.id.addMoreRecipeintButton);
+		recipientTextView = (TextView) findViewById(R.id.recipientTextView);
+		smsEditText = (EditText) findViewById(R.id.smsEditText);
+		Resources res = getResources();
+		badWordArray = res.getStringArray(R.array.badWords);
+		sendButton.setOnClickListener(send);
+		testButton.setOnClickListener(test);
+		addMoreRecipient.setOnClickListener(openContactList);
+	}
+
+	/*
+	 * Opens contact list
+	 */
+	private OnClickListener openContactList = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
+					Contacts.CONTENT_URI);
+			startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
+			// TODO need to take care of what needs to happen
+			// after the contact chooser is opened.
+		}
+	};
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			case CONTACT_PICKER_RESULT:
+				Cursor cursor = null;
+				String email = "";
+				try {
+					Uri result = data.getData();
+					Log.v(DEBUG_TAG,
+							"Got a contact result: " + result.toString());
+
+					// get the contact id from the Uri
+					String id = result.getLastPathSegment();
+
+					// query for everything email
+					cursor = getContentResolver().query(Email.CONTENT_URI,
+							null, Email.CONTACT_ID + "=?", new String[] { id },
+							null);
+
+					int emailIdx = cursor.getColumnIndex(Email.DATA);
+
+					// let's just get the first email
+					if (cursor.moveToFirst()) {
+						email = cursor.getString(emailIdx);
+						Log.v(DEBUG_TAG, "Got email: " + email);
+					} else {
+						Log.w(DEBUG_TAG, "No results");
+					}
+				} catch (Exception e) {
+					Log.e(DEBUG_TAG, "Failed to get email data", e);
+				} finally {
+					if (cursor != null) {
+						cursor.close();
+					}
+					recipientTextView.setText("Test recipient");
+					recipientTextView.setText(email);
+					if (email.length() == 0) {
+						Toast.makeText(this, "No email found for contact.",
+								Toast.LENGTH_LONG).show();
+					}
+				}
+				break;
+			}
+		} else {
+			Log.w(DEBUG_TAG, "Warning: activity result not ok");
+		}
+	}
+
+	private void sendSMS(String phoneNumber, String message) {
+		PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this,
+				Assignment2Activity.class), 0);
+		SmsManager sms = SmsManager.getDefault();
+		sms.sendTextMessage(phoneNumber, null, message, pi, null);
+	}
+
+	void call() {
+	    try {
+	        Intent callIntent = new Intent(Intent.ACTION_CALL);
+	        callIntent.setData(Uri.parse("tel:911"));
+	        startActivity(callIntent);
+	    } catch (ActivityNotFoundException activityException) {
+	        Log.e("dialing-example", "Call failed", activityException);
+	    }
+	}
+	/*
+	 * Testing method
+	 */
+	private OnClickListener test = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			call();
+//			EditText num=(EditText)findViewById(R.id.EditText01); 
+//	        String number = "tel:" + num.getText().toString().trim();
+//	        Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("911")); 
+//	        startActivity(callIntent);
+//			boolean empty = noBadWord();
+//			Toast.makeText(getApplicationContext(),"" + empty, Toast.LENGTH_SHORT)
+//			 .show();
+		}
+		// smsEditText.setText("this fag was bloody");
+		// String s1 = smsEditText.getText().toString();
+		// Spannable WordtoSpan = new SpannableString(s1);
+		// String temp1 = "";
+		// int s = 0;
+		// int end = 0;
+		// for (int i = 0; i < badWordArray.length; i++) {
+		// String bWString = badWordArray[i];
+		// Pattern pattern = Pattern.compile(bWString);
+		// String smsString = smsEditText.getText().toString();
+		// Matcher matcher = pattern.matcher(smsString);
+		// if (matcher.find()) {
+		// s = matcher.start();
+		// end = matcher.end();
+		// temp1 = bWString;
+		// }
+		//
+		// }
+		// Toast.makeText(getApplicationContext(), "" + s, Toast.LENGTH_SHORT)
+		// .show();
+		// Toast.makeText(getApplicationContext(), "" + end,
+		// Toast.LENGTH_SHORT).show();
+		// WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), s, end,
+		// Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		// smsEditText.setText(WordtoSpan);
+		// }
+	};
+
+	/*
+	 * Send sms
+	 */
+	private OnClickListener send = new OnClickListener() {
+
+		@Override
+		public void onClick(View view) {
+			// Check to see if recipient is not empty.
+			// Done
+			if (checkRecipient()) {
+				// Check to see if sms body is empty
+				// DONE
+				if (smsBodyisNotBlank()) {
+					// Check to see if SMS contains bad words
+					if (noBadWord()) {
+						// TODO send the message
+					String number = recipientTextView.getText().toString();
+					String temp = smsEditText.getText().toString();
+					Toast.makeText(getApplicationContext(),
+							 smsEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+						sendSMS(number,	temp);
+					} 
+					else if (noBadWord() == false) {
+						highLightBadWord(smsMessage, badWordStartIndex,
+								badWordEndIndex);
+					}
+					// Toast.makeText(getApplicationContext(),
+					// "Please add a message", Toast.LENGTH_SHORT).show();
+				}
+				// Toast.makeText(getApplicationContext(),
+				// "Please add a recipient", Toast.LENGTH_SHORT).show();
+			}
+
+		}
+	};
+
+	/*
+	 * highlights bad word
+	 */
+	private void highLightBadWord(String string, int badWordStartIndex,
+			int badWordEndIndex) {
+		Spannable WordtoSpan = new SpannableString(string);
+		WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED),
+				badWordStartIndex, badWordEndIndex,
+				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		smsEditText.setText(WordtoSpan);
+	}
+
+	private boolean noBadWord() {
+		smsMessage = smsEditText.getText().toString();
+		for (int i = 0; i < badWordArray.length; i++) {
+			String bWString = badWordArray[i];
+			Pattern pattern = Pattern.compile(bWString);
+			String smsString = smsEditText.getText().toString();
+			Matcher matcher = pattern.matcher(smsString);
+			if (matcher.find()) {
+				badWordStartIndex = matcher.start();
+				badWordEndIndex = matcher.end();
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/*
+	 * Checks for empty sms message
+	 * 
+	 * @Return true if sms is not empty
+	 * 
+	 * @Return false if sms is empty
+	 */
+	private boolean smsBodyisNotBlank() {
+		if (!smsEditText.getText().toString().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/*
+	 * Checks for empty recipient DONE
+	 */
+	private boolean checkRecipient() {
+		if (!recipientTextView.getText().toString().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}

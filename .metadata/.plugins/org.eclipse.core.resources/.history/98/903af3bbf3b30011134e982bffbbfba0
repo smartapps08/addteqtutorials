@@ -1,0 +1,59 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class CustomListViewDemoActivity extends Activity {
+	ArrayList<CountryProfile> countries;
+	CustomCountryAdapter cAdapter;
+	ListView lv;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		lv = (ListView) findViewById(R.id.listView1);
+		countries = new ArrayList<CountryProfile>();
+
+		CountryProfile c1 = new CountryProfile("country 1", "Capital Name 1",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		c1 = new CountryProfile("country 2", "Capital Name 2",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		c1 = new CountryProfile("country 3", "Capital Name 3",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		c1 = new CountryProfile("country 4", "Capital Name 4",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		
+		
+
+		cAdapter = new CustomCountryAdapter(this, countries);
+		lv.setAdapter(cAdapter);
+
+		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> parentView, View view,
+					int position, long id) {
+				Toast.makeText(getApplicationContext(),
+						"Selected Index: " + position, Toast.LENGTH_LONG)
+						.show();
+
+			}
+		});
+
+	}
+
+	class CustomCountryAdapter  {
+		
+
+}

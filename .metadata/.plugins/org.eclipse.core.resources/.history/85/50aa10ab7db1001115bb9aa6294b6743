@@ -1,0 +1,41 @@
+package com.myorg.brdemo;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.telephony.SmsMessage;
+import android.widget.Toast;
+
+public class SMSReceiver extends BroadcastReceiver {
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		Toast.makeText(context,
+				"Received Event: " + intent.getAction().toString(),
+				Toast.LENGTH_LONG).show();
+		//action
+		//category
+		//data as extra data
+		
+		//extract the sms
+		Bundle bundle=intent.getExtras();
+		SmsMessage[] chunks=null;
+		String text="";
+		String address="";
+		
+		if(bundle!=null)
+		{
+			Object[] pdus= (Object[])bundle.get("pdus");
+			chunks=new SmsMessage[pdus.length];
+			for(int i=0; i<pdus.length;i++)
+			{
+				
+			}
+		}
+		
+		//pass the number and text to the new activity through intent
+		//invoke an activity to reply the sms
+		
+	}
+}

@@ -1,0 +1,42 @@
+package com.myorg.brdemo;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class BroadcastReceivertutorialActivity extends Activity {
+	EditText etNumber, etReceivedText, etReplyText;
+	Button btnSend;
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+
+		etNumber = (EditText) findViewById(R.id.etNumber);
+		etReceivedText = (EditText) findViewById(R.id.etReceivedText);
+		etReplyText = (EditText) findViewById(R.id.etReplyText);
+
+		btnSend = (Button) findViewById(R.id.btnSend);
+
+		String number = getIntent().getStringExtra("number");
+		String text = getIntent().getStringExtra("text");
+
+		etNumber.setText(number);
+		etReceivedText.setText(text);
+
+		btnSend.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				SmsManager manager = SmsManager.getDefault();
+				manager.sendTextMessage(etNumber.getText().toString(), null,
+						etReplyText.getText().toString(), null, null);
+
+			}
+		});
+	}
+}

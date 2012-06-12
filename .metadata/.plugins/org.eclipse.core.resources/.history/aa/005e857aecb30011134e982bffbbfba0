@@ -1,0 +1,50 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+
+public class CustomListViewDemoActivity extends Activity {
+	ArrayList<CountryProfile> countries;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		
+		CountryProfile c1=new CountryProfile("country 1", "Capital Name 1", R.drawable.ic_launcher);
+		CountryProfile c2=new CountryProfile("country 2", "Capital Name 2", R.drawable.ic_launcher);
+		CountryProfile c3=new CountryProfile("country 3", "Capital Name 3", R.drawable.ic_launcher);
+		CountryProfile c4=new CountryProfile("country 4", "Capital Name 4", R.drawable.ic_launcher);
+		CountryProfile c5=new CountryProfile("country 5", "Capital Name 5", R.drawable.ic_launcher);
+		CountryProfile c6=new CountryProfile("country 6", "Capital Name 6", R.drawable.ic_launcher);
+		
+		countries=new ArrayList<CountryProfile>();
+		countries.add(c1);
+		countries.add(c2);
+		countries.add(c3);
+		countries.add(c4);
+		countries.add(c5);
+		countries.add(c6);
+	}
+	
+	
+	
+	
+	class CustomCountryAdapter extends ArrayAdapter<CountryProfile>
+	{
+
+		public CustomCountryAdapter(Context context, int resource,
+				int textViewResourceId) {
+			super(context, resource, textViewResourceId);
+			
+		}
+		
+	}
+	
+}

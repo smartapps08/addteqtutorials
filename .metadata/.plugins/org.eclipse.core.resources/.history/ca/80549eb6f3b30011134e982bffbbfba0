@@ -1,0 +1,109 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class CustomListViewDemoActivity extends Activity {
+	ArrayList<CountryProfile> countries;
+	CustomCountryAdapter cAdapter;
+	ListView lv;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		lv = (ListView) findViewById(R.id.listView1);
+		countries = new ArrayList<CountryProfile>();
+
+		CountryProfile c1 = new CountryProfile("country 1", "Capital Name 1",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		c1 = new CountryProfile("country 2", "Capital Name 2",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		c1 = new CountryProfile("country 3", "Capital Name 3",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		c1 = new CountryProfile("country 4", "Capital Name 4",
+				R.drawable.ic_launcher);
+		countries.add(c1);
+		
+		
+
+		cAdapter = new CustomCountryAdapter(this, countries);
+		lv.setAdapter(cAdapter);
+
+		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> parentView, View view,
+					int position, long id) {
+				Toast.makeText(getApplicationContext(),
+						"Selected Index: " + position, Toast.LENGTH_LONG)
+						.show();
+
+			}
+		});
+
+	}
+
+	class CustomCountryAdapter extends ArrayAdapter<CountryProfile> {
+		Context mContext;
+		ArrayList<CountryProfile> listItems;
+
+		public CustomCountryAdapter(Context context,
+				ArrayList<CountryProfile> countriesList) {
+			super(context, R.layout.items, countriesList);
+			mContext = context;
+			listItems = countriesList;
+
+		}
+
+		// static class ViewHolder
+		// {
+		// public TextView countryView;
+		// public TextView capitalView;
+		// }
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = null;
+
+			if (convertView == null) {
+				LayoutInflater inflator = getLayoutInflater();
+				v = inflator.inflate(R.layout.items, null, false);
+
+				TextView nameView = (TextView) v
+						.findViewById(R.id.txtCountryName);
+				TextView capitalView = (TextView) v
+						.findViewById(R.id.txtCapital);
+				ImageView flagView = (ImageView) v
+						.findViewById(R.id.imageView1);
+
+				nameView.setText(listItems.get(position).getCountryName());
+				capitalView.setText(listItems.get(position).getCapitalName());
+				flagView.setImageResource(listItems.get(position)
+						.getFlagImageRes());
+
+			} else {
+				v = convertView;
+			}
+
+			return v;
+		}
+
+	}
+
+}

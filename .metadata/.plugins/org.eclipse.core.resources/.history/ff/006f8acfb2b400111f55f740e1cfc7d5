@@ -1,0 +1,80 @@
+package com.myorg.dbdemo;
+
+import java.util.ArrayList;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+public class DBAdapter {
+	private Context context;
+	private SQLiteDatabase notesdb;
+	private DBHelper helper;
+	
+	public DBAdapter(Context context)
+	{
+		this.context=context;
+		helper=new DBHelper(context);	
+	}
+	
+	
+	// open database
+	public void open()
+	{
+		notesdb=helper.getWritableDatabase();
+	}
+	
+	// insert
+	public long insertNote(Note note)
+	{
+		ContentValues values=new ContentValues();
+		values.put(DBHelper.NOTE_TITLE, note.getTitle());
+		values.put(DBHelper.NOTE_BODY, note.getBody());
+		
+		return notesdb.insert(DBHelper.TABLE_NAME, null, values);
+		// insert into table values(key1, key 2) 
+	}
+	
+	// update
+	
+	
+	// queries
+	public ArrayList<Note> getAllNotes()
+	{
+		ArrayList<Note> notes=new ArrayList<Note>();
+		// make a query
+		// retreive notes
+		// add them to arraylist
+		String[] columns={DBHelper.NOTE_ID, DBHelper.NOTE_TITLE, DBHelper.NOTE_BODY};	
+		Cursor cursor=notesdb.query(DBHelper.TABLE_NAME, columns, null, null, null, null, null);
+		if(cursor!=null && cursor.getCount()>0)
+		{
+			int count=cursor.getCount();
+			cursor.moveToFirst();
+			
+		}
+		
+		return notes;
+	}
+	
+	public Note getNoteById(int id)
+	{
+		return null;
+	}
+	
+	public ArrayList<Note> getNotesByTitle(String title)
+	{
+		return null;
+	}
+	
+	// delete
+	
+	
+	// close database
+	public void close()
+	{
+		notesdb.close();
+	}
+	
+}

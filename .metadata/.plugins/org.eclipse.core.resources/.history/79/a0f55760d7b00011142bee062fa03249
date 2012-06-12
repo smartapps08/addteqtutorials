@@ -1,0 +1,3 @@
+package com.myorg.picker;
+
+public class Test { Interface intferface1 = new Interface1() { void interface1() { System.out.println("test"); }; }

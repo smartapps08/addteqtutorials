@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extracts string &apos;I\&apos;m a Fragment!&apos; into R.string.fragment_btn" description="Extracts string &apos;I\&apos;m a Fragment!&apos; into R.string.fragment_btn" file="/Fragments Demo/res/layout/fragment_basic.xml" flags="6" id="com.android.ide.eclipse.adt.refactoring.extract.string" mode="EDIT_SOURCE" proj="/Fragments Demo" rplc-all-java="false" rplc-all-xml="false" sel-end="321" sel-start="291" stamp="1339363125090" tok-esc="I\&apos;m a Fragment!" xml-attr-name="android:text"/>
+</session>

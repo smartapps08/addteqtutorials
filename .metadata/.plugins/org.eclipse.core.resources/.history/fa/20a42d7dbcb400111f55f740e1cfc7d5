@@ -1,0 +1,53 @@
+package com.myorg.servicedemo;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
+
+public class BasicService extends Service {
+
+	Timer timer;
+	int counter;
+	
+	@Override
+	public IBinder onBind(Intent intent) {
+		return null;
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Toast.makeText(getApplicationContext(), "BasicService::onStartCommand()", Toast.LENGTH_LONG).show();
+		return super.onStartCommand(intent, flags, startId);
+		
+	}
+	
+	@Override
+	public void onStart(Intent intent, int startId) {
+		super.onStart(intent, startId);
+		Toast.makeText(getApplicationContext(), "BasicService::onStart()", Toast.LENGTH_LONG).show();
+		
+		timer=new Timer();
+		TimerTask task=new TimerTask() {			
+			@Override
+			public void run() {
+				counter++;
+				Log.d("BasicService", "Counter value: "+counter);
+			}
+		};
+		timer.scheduleAtFixedRate(task, 1000, 5000);
+		
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		Toast.makeText(getApplicationContext(), "BasicService::onDestroy()", Toast.LENGTH_LONG).show();
+		timer.cancel();
+	}
+
+}

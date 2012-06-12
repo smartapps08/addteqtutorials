@@ -1,0 +1,7 @@
+package com.appteq.fragments;
+
+import android.app.Fragment;
+
+public class BasicFragment extends Fragment {
+
+}

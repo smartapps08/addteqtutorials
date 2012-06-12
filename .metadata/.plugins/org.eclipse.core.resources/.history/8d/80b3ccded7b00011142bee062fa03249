@@ -1,0 +1,11 @@
+
+public class Test {
+	Interface1 interface1=new Interface1() {
+		
+		@Override
+		public void interface1() {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+}

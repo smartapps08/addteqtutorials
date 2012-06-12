@@ -1,0 +1,7 @@
+package com.myorg.listactivity;
+
+public class CountryProfile {
+	private String countryName;
+	private String capitalName;
+	private int flagImageRes;
+}

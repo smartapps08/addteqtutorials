@@ -1,0 +1,12 @@
+
+
+public class Test {
+	Interface1 interface1=new Interface1() {
+		
+		
+		public void interface1() {
+			System.out.println("Test");
+			
+		}
+	};
+}

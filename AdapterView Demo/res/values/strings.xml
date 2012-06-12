@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, AdapterViewDemoActivity!</string>
+    <string name="app_name">AdapterView Demo</string>
+    <string-array name="osList">
+        <item >Ubuntu</item>
+        <item >Mac OSX</item>
+        <item >Windows</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,60 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class CustomCountryAdapter extends ArrayAdapter<CountryProfile>{
+	Activity mContext;
+	ArrayList<CountryProfile> listItems;
+
+	public CustomCountryAdapter(Activity context,
+			ArrayList<CountryProfile> countriesList) {
+		super(context, R.layout.items, countriesList);
+		mContext = context;
+		listItems = countriesList;
+
+	}
+
+	// static class ViewHolder
+	// {
+	// public TextView countryView;
+	// public TextView capitalView;
+	// }
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View v = null;
+
+		if (convertView == null) {
+			LayoutInflater inflator = mContext.getgetLayoutInflater();
+			v = inflator.inflate(R.layout.items, null, false);
+
+			TextView nameView = (TextView) v
+					.findViewById(R.id.txtCountryName);
+			TextView capitalView = (TextView) v
+					.findViewById(R.id.txtCapital);
+			ImageView flagView = (ImageView) v
+					.findViewById(R.id.imageView1);
+
+			nameView.setText(listItems.get(position).getCountryName());
+			capitalView.setText(listItems.get(position).getCapitalName());
+			flagView.setImageResource(listItems.get(position)
+					.getFlagImageRes());
+
+		} else {
+			v = convertView;
+		}
+
+		return v;
+	}
+
+}
+}

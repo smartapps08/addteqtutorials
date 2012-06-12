@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, FragmentsDemoActivity!</string>
+    <string name="app_name">Fragments Demo</string>
+    <string name="fragment_btn">I'm a Fragment!</string>
+
+</resources>

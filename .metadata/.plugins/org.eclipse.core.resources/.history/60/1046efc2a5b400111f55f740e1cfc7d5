@@ -1,0 +1,17 @@
+package com.myorg.dbdemo;
+
+public class DBAdapter {
+	
+	// open database
+	public void open()
+	{
+		
+	}
+	
+	// insert
+	// update
+	// queries
+	// delete
+	// close database
+	
+}

@@ -1,0 +1,81 @@
+package com.myorg.listactivity;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
+
+public class ExpandableListDemoActivity extends Activity {
+
+	ExpandableListView els;
+	MyExpandableListAdapter eListAdapter;
+
+	String[] countries = { "Country 1", "Country 2", "Country 3" };
+	String[][] cities = { { "city 11", "city 12", "city 13" },
+			{ "city 21", "city 22" }, { "city 31", "city 32", "city 33" }
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.exp_list_layout);
+		els = (ExpandableListView) findViewById(R.id.expandableListView1);
+
+	}
+
+	class MyExpandableListAdapter extends BaseExpandableListAdapter {
+
+		public Object getChild(int groupPosition, int childPosition) {
+			return cities[groupPosition][childPosition];
+		}
+
+		public long getChildId(int groupPosition, int childPosition) {
+			return childPosition;
+		}
+
+		public View getChildView(int groupPosition, int childPosition,
+				boolean isLastChild, View convertView, ViewGroup parent) {
+			return null;
+		}
+
+		public int getChildrenCount(int groupPosition) {
+			return 0;
+		}
+
+		public Object getGroup(int groupPosition) {
+			
+			return null;
+		}
+
+		public int getGroupCount() {
+			
+			return 0;
+		}
+
+		public long getGroupId(int groupPosition) {
+			
+			return 0;
+		}
+
+		public View getGroupView(int groupPosition, boolean isExpanded,
+				View convertView, ViewGroup parent) {
+			
+			return null;
+		}
+
+		public boolean hasStableIds() {
+			
+			return false;
+		}
+
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			
+			return false;
+		}
+
+	}
+
+}

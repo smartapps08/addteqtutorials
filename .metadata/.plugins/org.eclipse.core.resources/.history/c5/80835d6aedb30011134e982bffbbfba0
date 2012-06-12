@@ -1,0 +1,70 @@
+package com.myorg.listactivity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class CustomListViewDemoActivity extends Activity {
+	ArrayList<CountryProfile> countries;
+	CustomCountryAdapter cAdapter;
+	ListView lv;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		lv=(ListView)findViewById(R.id.listView1);
+		
+		CountryProfile c1=new CountryProfile("country 1", "Capital Name 1", R.drawable.ic_launcher);
+		CountryProfile c2=new CountryProfile("country 2", "Capital Name 2", R.drawable.ic_launcher);
+		CountryProfile c3=new CountryProfile("country 3", "Capital Name 3", R.drawable.ic_launcher);
+		CountryProfile c4=new CountryProfile("country 4", "Capital Name 4", R.drawable.ic_launcher);
+		CountryProfile c5=new CountryProfile("country 5", "Capital Name 5", R.drawable.ic_launcher);
+		CountryProfile c6=new CountryProfile("country 6", "Capital Name 6", R.drawable.ic_launcher);
+		
+		countries=new ArrayList<CountryProfile>();
+		countries.add(c1);
+		countries.add(c2);
+		countries.add(c3);
+		countries.add(c4);
+		countries.add(c5);
+		countries.add(c6);
+		
+		cAdapter=new CustomCountryAdapter(this, countries);
+		lv.setAdapter(cAdapter);
+		
+		
+	}
+	
+	
+	
+	
+	class CustomCountryAdapter extends ArrayAdapter<CountryProfile>
+	{
+		Context mContext;
+		ArrayList<CountryProfile> listItems;
+
+		public CustomCountryAdapter(Context context,
+				ArrayList<CountryProfile> countriesList) {
+			super(context, R.layout.items, countriesList);
+			
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			return super.getView(position, convertView, parent);
+		}
+		
+		
+	}
+	
+}

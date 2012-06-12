@@ -1,0 +1,48 @@
+package com.appteq.fragments;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class BasicFragment extends Fragment {
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_basic, container, false);
+
+		// This is how you access your layout views. Notice how we call the
+		// findViewById() method
+		// on our View directly. There is no method called findViewById()
+		// defined on Fragments like
+		// there is in an Activity.
+		Button button = (Button) view.findViewById(R.id.fragment_button);
+
+		// A simple OnClickListener for our button. You can see here how a
+		// Fragment can encapsulate
+		// logic and views to build out re-usable Activity components.
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Activity activity = getActivity();
+
+				if (activity != null) {
+					Toast.makeText(activity,
+							"You have just clicked on a fragment",
+							Toast.LENGTH_LONG).show();
+				}
+			}
+
+		});
+
+		return view;
+
+	}
+
+}
