@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Options Menu Tutorial</string>
+    <string name="title_menu1">New Game</string>
+    <string name="title_item2">Save Game</string>
+
+</resources>
